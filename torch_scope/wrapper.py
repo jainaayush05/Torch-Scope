@@ -174,7 +174,7 @@ class basic_wrapper(object):
 
         result = subprocess.check_output(['nvidia-smi', '--query-gpu=memory.used,utilization.gpu',
                     '--format=csv,noheader'], encoding='utf-8')
-        gpu_memory = result.strip()#.split(base64.b64encode("\n".encode("utf-8")))
+        gpu_memory = [result.strip()]#.split(base64.b64encode("\n".encode("utf-8")))
         gpu_memory_map = {x: y.split(',') for x, y in zip(range(len(gpu_memory)), gpu_memory)}
 
         if use_logger:
