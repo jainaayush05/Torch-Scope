@@ -14,6 +14,7 @@ import shutil
 import random
 import logging
 import subprocess
+import base64
 from typing import Dict
 from tensorboardX import SummaryWriter
 
@@ -173,7 +174,7 @@ class basic_wrapper(object):
 
         result = subprocess.check_output(['nvidia-smi', '--query-gpu=memory.used,utilization.gpu',
                     '--format=csv,noheader'], encoding='utf-8')
-        gpu_memory = result.strip().split(base64.b64encode(b"\n"))
+        gpu_memory = result.strip().split(base64.b64encode("\n".encode("utf-8")))
         gpu_memory_map = {x: y.split(',') for x, y in zip(range(len(gpu_memory)), gpu_memory)}
 
         if use_logger:
